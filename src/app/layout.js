@@ -12,9 +12,32 @@ const inter = Inter({
 });
 
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
   title: "BookBazaar — Premium Student Marketplace",
   description:
-    "The modern second-hand book marketplace for university students. Secure, transparent, and student-powered.",
+    "The modern second-hand book marketplace for university students. Secure, transparent, and student-powered. Buy and sell textbooks with ease.",
+  keywords: "books, marketplace, university, student, second-hand, textbooks",
+  openGraph: {
+    title: "BookBazaar — Premium Student Marketplace",
+    description: "The modern second-hand book marketplace for university students.",
+    url: "https://bookbazaar.vercel.app", // Placeholder for user's domain
+    siteName: "BookBazaar",
+    images: [
+      {
+        url: "/og-image.png", // User would need to provide this
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BookBazaar — Premium Student Marketplace",
+    description: "The modern second-hand book marketplace for university students.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({ children }) {

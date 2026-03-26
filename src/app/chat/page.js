@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
 import { io } from "socket.io-client";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,9 +14,10 @@ import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const socket = io("http://localhost:5000", { withCredentials: true });
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const socket = io(SOCKET_URL, { withCredentials: true });
 
-export default function ChatPage() {
+function ChatContent() {
   const { user, loading: authLoading } = useAuth();
   const [chats, setChats] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
@@ -385,5 +386,18 @@ export default function ChatPage() {
         </AnimatePresence>
       </main>
     </div>
+  );
+}
+
+export default function ChatPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+        <Loader2 className="w-8 h-8 text-indigo-600 animate-spin" />
+        <p className="text-gray-400 mt-4 font-medium">Loading your conversations...</p>
+      </div>
+    }>
+      <ChatContent />
+    </Suspense>
   );
 }
