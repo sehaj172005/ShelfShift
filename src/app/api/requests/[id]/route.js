@@ -1,5 +1,7 @@
 import connectDB from "@/lib/mongodb";
 import Request from "@/models/Request";
+import "@/models/Book"; // needed for Request.populate("book")
+import "@/models/User"; // needed for Request.populate("buyer") / populate("seller")
 import { protect } from "@/lib/middleware";
 import { NextResponse } from "next/server";
 

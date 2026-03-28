@@ -1,5 +1,6 @@
 import connectDB from "@/lib/mongodb";
 import Book from "@/models/Book";
+import "@/models/User"; // needed for Book.populate("seller")
 import { callGroq, groq } from "@/lib/ai";
 import { NextResponse } from "next/server";
 

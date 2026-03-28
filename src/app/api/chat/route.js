@@ -1,6 +1,8 @@
 import connectDB from "@/lib/mongodb";
 import Chat from "@/models/Chat";
 import Request from "@/models/Request";
+import "@/models/Book"; // needed for populate("book")
+import "@/models/User"; // needed for populate("buyer") / populate("seller")
 import { protect } from "@/lib/middleware";
 import { NextResponse } from "next/server";
 

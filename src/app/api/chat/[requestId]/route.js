@@ -1,6 +1,7 @@
 import connectDB from "@/lib/mongodb";
 import Chat from "@/models/Chat";
 import Request from "@/models/Request";
+import "@/models/User"; // needed for Chat.populate("sender")
 import { protect } from "@/lib/middleware";
 import { NextResponse } from "next/server";
 

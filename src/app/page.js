@@ -9,6 +9,7 @@ import Link from "next/link";
 
 import connectDB from "@/lib/mongodb";
 import Book from "@/models/Book";
+import "@/models/User"; // ensure User schema is registered for Book.populate("seller")
 
 // Server-side data fetching — direct DB query (no HTTP round-trip)
 async function fetchBooksData(searchParams) {
