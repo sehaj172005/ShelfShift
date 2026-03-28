@@ -10,8 +10,12 @@ import Link from "next/link";
 // Server-side data fetching
 async function fetchBooksData(searchParams) {
   const { category } = searchParams;
-  let url = `http://127.0.0.1:5000/api/books`; // Using 127.0.0.1 for more stable SSR internal networking
-  
+  // Use the production PORT assigned by Render, defaulting to 5000 for local dev
+  const port = process.env.PORT || 5000;
+  let url = `${process.env.NEXT_PUBLIC_API_URL}/api/books`;
+
+  console.log(`🔍 [SSR] Fetching books from internal URL: ${url}`);
+
   const query = new URLSearchParams();
   if (category && category !== "all") {
     if (category === "Bundles") {
@@ -22,14 +26,19 @@ async function fetchBooksData(searchParams) {
   }
 
   try {
-    const res = await fetch(`${url}?${query.toString()}`, { 
+    const res = await fetch(`${url}?${query.toString()}`, {
       next: { revalidate: 0 } // no-cache for dev demo
     });
 
-    if (!res.ok) return [];
-    return res.json();
+    if (!res.ok) {
+      console.error(`❌ [SSR] Fetch Failed: ${res.status} ${res.statusText}`);
+      return [];
+    }
+    const data = await res.json();
+    console.log(`✅ [SSR] Successfully fetched ${data.length} books!`);
+    return data;
   } catch (error) {
-    console.error("❌ SSR Fetch Failed:", error.message);
+    console.error("❌ [SSR] Fetch Error:", error.message);
     return []; // Return empty array so the page doesn't crash
   }
 }
@@ -152,7 +161,7 @@ export default async function HomePage({ searchParams }) {
                 </p>
                 <div className="flex flex-wrap gap-5">
                   <Link href="/sell">
-                    <button 
+                    <button
                       suppressHydrationWarning
                       className="h-16 flex items-center justify-center px-10 bg-white text-slate-900 hover:bg-slate-50 rounded-2xl font-black text-lg transition-all hover:scale-105 active:scale-95 shadow-xl shadow-white/5"
                     >
@@ -161,7 +170,7 @@ export default async function HomePage({ searchParams }) {
                     </button>
                   </Link>
                   <Link href="/profile">
-                    <button 
+                    <button
                       suppressHydrationWarning
                       className="h-16 flex items-center justify-center px-10 bg-white/5 text-white hover:bg-white/10 border border-white/10 rounded-2xl font-black text-lg transition-all hover:scale-105 active:scale-95"
                     >
