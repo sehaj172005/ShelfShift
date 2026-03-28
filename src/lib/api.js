@@ -1,12 +1,9 @@
 import axios from "axios";
 
-const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? `${process.env.BACKEND_URL}/api`
-    : `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/api`;
+
 
 const API = axios.create({
-  baseURL: BASE_URL,
+  baseURL: "/api",
   timeout: 30000,
 });
 
