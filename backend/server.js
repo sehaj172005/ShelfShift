@@ -91,7 +91,7 @@ app.use("/api/ai", require("./routes/ai"));
 
 // Health check API
 app.get("/api/health", (req, res) => {
-  res.json({ message: "BookBazaar API running 🚀", status: "OK" });
+  res.json({ message: "ShelfShift API running 🚀", status: "OK" });
 });
 
 // Next.js Catch-all (placed after all other routes)

@@ -27,7 +27,11 @@ export default function AuthPage() {
         await register(formData.name, formData.email, formData.password);
       }
     } catch (err) {
-      // toast is handled in context usually, or we can add it here
+      const { toast } = await import("sonner");
+      toast.error("Network Error", {
+        description: "Please check your internet connection and try again.",
+        duration: 4000
+      });
     } finally {
       setLoading(false);
     }
@@ -51,7 +55,7 @@ export default function AuthPage() {
         >
            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-white/20 text-indigo-600 text-xs font-black tracking-widest uppercase mb-12 shadow-sm w-fit">
               <Sparkles className="w-4 h-4 text-amber-500" />
-              <span>Sustainable Campus Trading</span>
+              <span>Sustainable Student Trading</span>
            </div>
            
            <h1 className="text-7xl lg:text-8xl font-black tracking-tighter leading-[0.85] mb-8 text-slate-900">
@@ -126,7 +130,7 @@ export default function AuthPage() {
                     exit={{ opacity: 0, y: -10 }}
                     className="space-y-2"
                   >
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Full Campus Name</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Full Name</label>
                     <div className="relative group">
                       <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within:text-indigo-500 transition-colors" />
                       <input
@@ -135,6 +139,7 @@ export default function AuthPage() {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="John Doe"
+                        suppressHydrationWarning
                         className="w-full h-16 pl-14 pr-6 bg-white/50 border border-white/80 rounded-2xl focus:bg-white focus:ring-8 focus:ring-indigo-500/5 focus:border-indigo-100 transition-all text-sm font-bold shadow-inner outline-none"
                       />
                     </div>
@@ -152,6 +157,7 @@ export default function AuthPage() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="student@edu.in"
+                    suppressHydrationWarning
                     className="w-full h-16 pl-14 pr-6 bg-white/50 border border-white/80 rounded-2xl focus:bg-white focus:ring-8 focus:ring-indigo-500/5 focus:border-indigo-100 transition-all text-sm font-bold shadow-inner outline-none"
                   />
                 </div>
@@ -167,6 +173,7 @@ export default function AuthPage() {
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     placeholder="••••••••"
+                    suppressHydrationWarning
                     className="w-full h-16 pl-14 pr-6 bg-white/50 border border-white/80 rounded-2xl focus:bg-white focus:ring-8 focus:ring-indigo-500/5 focus:border-indigo-100 transition-all text-sm font-bold shadow-inner outline-none"
                   />
                 </div>
@@ -175,6 +182,7 @@ export default function AuthPage() {
               <Button
                 type="submit"
                 disabled={loading}
+                suppressHydrationWarning
                 className="w-full h-18 bg-indigo-600 hover:bg-indigo-700 text-white rounded-[24px] text-lg font-black shadow-xl shadow-indigo-200 mt-6 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3"
               >
                 {loading ? (
@@ -184,7 +192,7 @@ export default function AuthPage() {
                   </>
                 ) : (
                   <>
-                    <span>{isLogin ? "Sign In to Bazaar" : "Start your Journey"}</span>
+                    <span>{isLogin ? "Sign In to ShelfShift" : "Start your Journey"}</span>
                     <ArrowRight className="w-5 h-5" />
                   </>
                 )}

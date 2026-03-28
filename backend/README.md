@@ -1,11 +1,11 @@
-# BookBazaar Backend
+# ShelfShift Backend
 
 ## Setup
 
 1. Fill in your MongoDB URI in `.env`:
 ```
-MONGO_URI=mongodb+srv://<user>:<password>@cluster0.mongodb.net/bookbazaar
-JWT_SECRET=bookbazaar_super_secret_key_2025
+MONGO_URI=mongodb+srv://<user>:<password>@cluster0.mongodb.net/shelfshift
+JWT_SECRET=shelfshift_super_secret_key_2025
 PORT=5000
 ```
 

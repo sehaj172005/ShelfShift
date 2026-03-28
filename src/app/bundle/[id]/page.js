@@ -173,7 +173,7 @@ export default function BundleDetailPage({ params }) {
             <p className="text-xs text-gray-500 mt-0.5">{bundle.distance} km from you</p>
             <div className="mt-2 px-3 py-2 bg-white/80 rounded-lg border border-emerald-200/50">
               <p className="text-[11px] text-emerald-700 font-medium">
-                💡 Suggested: Meet near campus gate or metro station for safe exchange
+                💡 Suggested: Meet in a safe public place or metro station for safe exchange
               </p>
             </div>
           </div>

@@ -13,15 +13,15 @@ const inter = Inter({
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
-  title: "BookBazaar — Premium Student Marketplace",
+  title: "ShelfShift — Premium Student Marketplace",
   description:
     "The modern second-hand book marketplace for university students. Secure, transparent, and student-powered. Buy and sell textbooks with ease.",
   keywords: "books, marketplace, university, student, second-hand, textbooks",
   openGraph: {
-    title: "BookBazaar — Premium Student Marketplace",
+    title: "ShelfShift — Premium Student Marketplace",
     description: "The modern second-hand book marketplace for university students.",
-    url: "https://bookbazaar.vercel.app", // Placeholder for user's domain
-    siteName: "BookBazaar",
+    url: "https://shelfshift.vercel.app", // Placeholder for user's domain
+    siteName: "ShelfShift",
     images: [
       {
         url: "/og-image.png", // User would need to provide this
@@ -34,7 +34,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BookBazaar — Premium Student Marketplace",
+    title: "ShelfShift — Premium Student Marketplace",
     description: "The modern second-hand book marketplace for university students.",
     images: ["/og-image.png"],
   },
@@ -42,7 +42,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} min-h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} min-h-full antialiased`} suppressHydrationWarning>
       <body className="bg-background">
         <AuthProvider>
           <div className="app-shell">
@@ -61,13 +61,17 @@ export default function RootLayout({ children }) {
         </AuthProvider>
         <Toaster
           position="top-center"
+          richColors
+          closeButton
           toastOptions={{
             style: {
-              borderRadius: "20px",
-              padding: "16px",
+              borderRadius: "24px",
+              padding: "16px 20px",
               fontSize: "14px",
-              fontWeight: "600",
-              boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+              fontWeight: "700",
+              boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              backdropFilter: "blur(8px)",
             },
           }}
         />

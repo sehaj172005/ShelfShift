@@ -100,7 +100,7 @@ export default function ProfilePage() {
     }
   };
 
-  if (loading || authLoading || !profileData) {
+  if (loading || authLoading || !profileData || !user) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-white">
         <Loader2 className="w-8 h-8 text-indigo-600 animate-spin" />
@@ -109,7 +109,10 @@ export default function ProfilePage() {
     );
   }
 
-  const { myBooks: listedBooks = [], requestsSent = [], requestsReceived = [] } = profileData;
+  // Safe destructuring with double-checks
+  const listedBooks = profileData?.myBooks || [];
+  const requestsSent = profileData?.requestsSent || [];
+  const requestsReceived = profileData?.requestsReceived || [];
 
   const stats = [
     { label: "Active Listings", value: listedBooks.filter(b => !b.isSold).length, icon: Package, color: "text-indigo-600 bg-indigo-50" },
@@ -127,19 +130,27 @@ export default function ProfilePage() {
             <div className="flex items-center gap-6">
                <div className="w-24 h-24 md:w-32 md:h-32 rounded-[40px] bg-gradient-to-br from-indigo-500 to-indigo-700 p-1 shadow-2xl shadow-indigo-100 ring-4 ring-white">
                   <div className="w-full h-full rounded-[36px] bg-white flex items-center justify-center text-4xl md:text-5xl font-black text-indigo-600 uppercase">
-                     {user.name.charAt(0)}
+                     {user?.name?.charAt(0)}
                   </div>
                </div>
                <div>
-                  <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter mb-2">{user.name}</h1>
-                  <p className="text-sm md:text-base text-gray-400 font-bold uppercase tracking-widest">{user.badge || "Academic Maven"}</p>
+                  <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter mb-2">{user?.name}</h1>
+                  <p className="text-sm md:text-base text-gray-400 font-bold uppercase tracking-widest">{user?.badge || "Academic Maven"}</p>
                   <div className="flex items-center gap-2 mt-3">
-                     <button onClick={openEditModal} className="px-4 py-2 rounded-xl bg-white border border-gray-100 text-xs font-black shadow-sm hover:bg-gray-50 flex items-center gap-2 transition-colors">
-                        <Settings size={14} /> Edit Profile
-                     </button>
-                     <button onClick={() => { logout(); router.push("/"); }} className="px-4 py-2 rounded-xl bg-red-50 border border-red-100 text-xs font-black text-red-600 shadow-sm hover:bg-red-100 flex items-center gap-2">
-                        <LogOut size={14} /> Sign Out
-                     </button>
+                      <button 
+                        onClick={openEditModal} 
+                        suppressHydrationWarning
+                        className="px-4 py-2 rounded-xl bg-white border border-gray-100 text-xs font-black shadow-sm hover:bg-gray-50 flex items-center gap-2 transition-colors"
+                      >
+                         <Settings size={14} /> Edit Profile
+                      </button>
+                      <button 
+                        onClick={() => { logout(); router.push("/"); }} 
+                        suppressHydrationWarning
+                        className="px-4 py-2 rounded-xl bg-red-50 border border-red-100 text-xs font-black text-red-600 shadow-sm hover:bg-red-100 flex items-center gap-2"
+                      >
+                         <LogOut size={14} /> Sign Out
+                      </button>
                   </div>
                </div>
             </div>
@@ -372,6 +383,7 @@ export default function ProfilePage() {
                     type="text"
                     value={editForm.name}
                     onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                    suppressHydrationWarning
                     className="w-full h-14 px-5 bg-gray-50 rounded-2xl border-none focus:ring-4 focus:ring-indigo-500/10 focus:bg-white transition-all text-sm font-bold text-gray-900 outline-none"
                     placeholder="Your full name"
                   />
@@ -385,6 +397,7 @@ export default function ProfilePage() {
                     type="text"
                     value={editForm.location}
                     onChange={(e) => setEditForm({ ...editForm, location: e.target.value })}
+                    suppressHydrationWarning
                     className="w-full h-14 px-5 bg-gray-50 rounded-2xl border-none focus:ring-4 focus:ring-indigo-500/10 focus:bg-white transition-all text-sm font-bold text-gray-900 outline-none"
                     placeholder="e.g. IIT Delhi, Hauz Khas"
                   />

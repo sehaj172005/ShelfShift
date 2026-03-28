@@ -51,7 +51,11 @@ export function AuthProvider({ children }) {
       router.push("/");
       return true;
     } catch (err) {
-      toast.error(err.response?.data?.message || "Login failed");
+      const message = err.response?.data?.message || "Something went wrong at the gateway";
+      toast.error("Auth Failure", {
+        description: message,
+        duration: 5000,
+      });
       return false;
     }
   };
@@ -65,11 +69,17 @@ export function AuthProvider({ children }) {
       localStorage.setItem("bb_user", JSON.stringify(userData));
       setUser(userData);
       
-      toast.success("Account created successfully!");
+      toast.success("Welcome to the Community! ✨", {
+        description: "Your student account is now active.",
+      });
       router.push("/");
       return true;
     } catch (err) {
-      toast.error(err.response?.data?.message || "Registration failed");
+      const message = err.response?.data?.message || "Could not complete registration";
+      toast.error("Account Error", {
+        description: message,
+        duration: 5000,
+      });
       return false;
     }
   };

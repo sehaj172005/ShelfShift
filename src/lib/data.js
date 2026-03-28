@@ -1,4 +1,4 @@
-// Mock data for BookBazaar — Phase 3: Intelligence + Trust + Location
+// Mock data for ShelfShift — Phase 3: Intelligence + Trust + Location
 
 // ========== BOOKS ==========
 

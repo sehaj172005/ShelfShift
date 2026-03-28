@@ -1,7 +1,7 @@
 {
-  "name": "bookbazaar-backend",
+  "name": "shelfshift-backend",
   "version": "1.0.0",
-  "description": "BookBazaar API — Node.js + Express + MongoDB",
+  "description": "ShelfShift API — Node.js + Express + MongoDB",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

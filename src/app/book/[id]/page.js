@@ -247,7 +247,7 @@ export default function BookDetailPage({ params }) {
                          <ShieldCheck className="w-5 h-5 text-emerald-500" />
                       </div>
                       <p className="text-[11px] font-bold text-gray-500 leading-tight">
-                        Payments are handled offline directly between students. Be safe and meet in campus zones.
+                        Payments are handled offline directly between students. Be safe and meet in safe public zones.
                       </p>
                    </div>
                 </div>

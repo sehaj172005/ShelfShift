@@ -60,7 +60,7 @@ export default function SellPage() {
     condition: "Good",
     category: "JEE",
     description: "",
-    location: "Campus Common Area",
+    location: "Public Meeting Point",
   });
 
   const [bundleForm, setBundleForm] = useState({
@@ -526,7 +526,7 @@ export default function SellPage() {
                         <Sparkles size={40} className="text-white" />
                      </div>
                      <h2 className="text-3xl font-black text-gray-900 tracking-tighter mb-4">Ready for Launch?</h2>
-                     <p className="text-gray-500 font-medium mb-10 max-w-sm mx-auto">Review your details carefully. Your book will be visible to thousands within campus.</p>
+                     <p className="text-gray-500 font-medium mb-10 max-w-sm mx-auto">Review your details carefully. Your book will be visible to thousands of buyers instantly.</p>
                      
                      {/* Preview Snippet */}
                      <div className="bg-white/80 border border-white rounded-3xl p-6 flex items-center gap-5 text-left mb-10 shadow-sm">
